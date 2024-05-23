@@ -18,7 +18,7 @@ public class Multiply extends Operation{
 
     @Override
     public double operation(double number1, double number2) {
-        double resultado = 0;
+        double resultado;
         resultado = number1*number2;
         this.result = resultado;
         this. operator = "Multiplicacion";

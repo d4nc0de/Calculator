@@ -18,7 +18,11 @@ public class Add extends Operation{
 
     @Override
     public double operation(double number1, double number2) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        double resultado;
+        resultado = number1+number2;
+        this.result = resultado;
+        this. operator = "Suma";
+        return resultado;
     }
 
     

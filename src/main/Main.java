@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main;
+import controlador.ControllerAdd;
 import modelo.Modelo;
 import vista.Vista;
 import controlador.ControllerMultiply;
@@ -19,7 +20,8 @@ public class Main {
      Vista view = new Vista();  
      ViewController ctrlView = new ViewController(view, mod);
      ControllerMultiply ctrlMulty = new ControllerMultiply( view, mod);
-     //Añadir los controladores aqui
+     ControllerAdd crtAdd = new ControllerAdd(view, mod);
+     
      
      
      
