@@ -39,9 +39,12 @@ public class ControllerHistory implements ActionListener {
         ArrayList array = new ArrayList<>();
         array = History.getInstance().getOperations();
         
-        for (int i = 0; i < array.size() ; i++) {
-            modelolist.addElement(array.get(i));
+        
+        int cont = 0;
+        for (int i =  array.size() - 1; i >= 0 ; i--) {
             
+            modelolist.addElement(array.get(i)) ;
+            cont += 1;
         }
     }
 }
