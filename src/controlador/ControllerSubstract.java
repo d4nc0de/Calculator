@@ -10,12 +10,12 @@ import modelo.History;
 import modelo.Modelo;
 import vista.Vista;
 
-public class ControllerAdd implements ActionListener {
+public class ControllerSubstract implements ActionListener {
 
     private Vista view;
     private Modelo model;
 
-    public ControllerAdd(Vista view, Modelo model) {
+    public ControllerSubstract(Vista view, Modelo model) {
 
         this.model = model;
         this.view = view;
