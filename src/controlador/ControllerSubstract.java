@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import modelo.Add;
 import modelo.History;
 import modelo.Modelo;
+import modelo.Substract;
 import vista.Vista;
 
 public class ControllerSubstract implements ActionListener {
@@ -33,7 +34,7 @@ public class ControllerSubstract implements ActionListener {
         view.txtResult.setText(String.valueOf(model.getResultado()));
     }
 
-    public static Response createAddition(String numero1, String numero2) {
+    public static Response createSubstraction(String numero1, String numero2) {
         try {
             int intN1, intN2;
             try {
@@ -47,8 +48,8 @@ public class ControllerSubstract implements ActionListener {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
             History history = History.getInstance();
-            history.addOperation(new Add(intN1,intN2));
-            return new Response("Addition created successfully", Status.CREATED);
+            history.addOperation(new Substract(intN1,intN2));
+            return new Response("Substraction created successfully", Status.CREATED);
         } catch (Exception ex) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
         }
