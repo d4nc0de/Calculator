@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package main;
+
 import controlador.ControllerAdd;
 import controlador.ControllerDivide;
 import controlador.ControllerHistory;
@@ -13,23 +14,16 @@ import controlador.ControllerPower;
 import controlador.ControllerSubstract;
 import controlador.ViewController;
 import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Daniel
  */
 public class Main {
-    
-    
-    public static void main(String[] args){
-       
-     
-    java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Vista().setVisible(true);
-            }
-        });
-     
-     
-     
+
+    public static void main(String[] args) {
+        Vista view = new Vista();
+        view.setVisible(true);
+
     }
 }

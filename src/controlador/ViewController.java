@@ -11,16 +11,11 @@ public class ViewController {
     private Modelo model;
 
     public ViewController(Vista view, Modelo model) {
-
         this.view = view;
         this.model = model;
-
     }
+    
+    //public static Response 
 
-    public void start() {
-
-        view.setTitle("Calculadora");
-        view.setLocationRelativeTo(null);
-
-    }
+    
 }

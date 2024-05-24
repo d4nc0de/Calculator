@@ -23,24 +23,26 @@ public class ControllerDivide {
 
     }
 
-    public static Response createDivision(String numero1, String numero2) {
+    public static Response createDivition(String numero1, String numero2) {
         try {
-            int intN1, intN2;
+            double DoubleN1, DoubleN2;
             try {
-                intN1 = Integer.parseInt(numero1);
+                DoubleN1 = Double.parseDouble(numero1);
             } catch (NumberFormatException ex) {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
             try {
-                intN2 = Integer.parseInt(numero2);
+                DoubleN2 = Double.parseDouble(numero2);
             } catch (NumberFormatException ex) {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
-            if( intN2 == 0){
+            
+            if( DoubleN2 == 0){
                 return new Response ("Divider can't be 0", Status.BAD_REQUEST);
             }
             History history = History.getInstance();
-            history.addOperation(new Divide(intN1,intN2));
+            history.addOperation(new Divide(DoubleN1,DoubleN2));
+            System.out.println("Se agrego la division a la lista");
             return new Response("Division created successfully", Status.CREATED);
         } catch (Exception ex) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);

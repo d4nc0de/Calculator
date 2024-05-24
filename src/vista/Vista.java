@@ -5,13 +5,17 @@
 package vista;
 
 import controlador.ControllerAdd;
+import controlador.ControllerDivide;
+import controlador.ControllerHistory;
+import controlador.ControllerMultiply;
+import controlador.ControllerPower;
 import controlador.ControllerSubstract;
 import controlador.util.Response;
 import modelo.History;
 import modelo.Operation;
 import java.util.ArrayList;
-import java.util.Collections;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import modelo.Add;
 
@@ -21,13 +25,7 @@ import modelo.Add;
  */
 public class Vista extends javax.swing.JFrame {
 
-    private History history;
-
-    /**
-     * Creates new form Calculator
-     */
     public Vista() {
-        this.history = new History();
         initComponents();
     }
 
@@ -226,12 +224,13 @@ public class Vista extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() == 201) {
+            txtPrimerNumero.setText("");
+            txtSegundoNumero.setText("");
+            ControllerHistory.updateHistory();
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         }
-
-        txtPrimerNumero.setText("");
-        txtSegundoNumero.setText("");        
 
 
     }//GEN-LAST:event_btnAddActionPerformed
@@ -246,45 +245,99 @@ public class Vista extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() == 201) {
+            txtPrimerNumero.setText("");
+            txtSegundoNumero.setText("");
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         }
-
-        txtPrimerNumero.setText("");
-        txtSegundoNumero.setText("");       
-        
 
 
     }//GEN-LAST:event_btnSubtractActionPerformed
 
     private void btnMultiplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultiplyActionPerformed
-        // TODO add your handling code here:
+        String num1 = txtPrimerNumero.getText();
+        String num2 = txtSegundoNumero.getText();
+
+        Response response = ControllerMultiply.createMultiplication(num1, num2);
+
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() == 201) {
+            txtPrimerNumero.setText("");
+            txtSegundoNumero.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnMultiplyActionPerformed
 
     private void btnDivideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDivideActionPerformed
-        // TODO add your handling code here:
+        String num1 = txtPrimerNumero.getText();
+        String num2 = txtSegundoNumero.getText();
+
+        Response response = ControllerDivide.createDivition(num1, num2);
+
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() == 201) {
+            txtPrimerNumero.setText("");
+            txtSegundoNumero.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnDivideActionPerformed
 
     private void btnPotencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPotencyActionPerformed
-        // TODO add your handling code here:
+        String num1 = txtPrimerNumero.getText();
+        String num2 = txtSegundoNumero.getText();
+
+        Response response = ControllerPower.createPower(num1, num2);
+
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() == 201) {
+            txtPrimerNumero.setText("");
+            txtSegundoNumero.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnPotencyActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
+        txtPrimerNumero.setText("");
+        txtSegundoNumero.setText("");
+        txtResult.setText("");
+        //txtHistory.setText("");
 
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
+
 
     }//GEN-LAST:event_btnUpdateActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    public JList<String> getTxtHistory() {
+        return txtHistory;
+    }
+
+    private static Vista instance;
+
+    public static Vista getInstance() {
+        if (instance == null) {
+            instance = new Vista();
+        }
+        return instance;
+    }
+
     public static void main(String args[]) {
 
     }
