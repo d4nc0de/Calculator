@@ -15,11 +15,11 @@ public abstract class Operation {
     protected String operator;
     protected double result;
 
-    public Operation(double number1, double number2) {
+    public Operation(double number1, double number2, String operator, double result) {
         this.number1 = number1;
         this.number2 = number2;
-        this.operator = null;
-        this.result = 0;
+        this.operator = operator;
+        this.result = result;
     }
 
     @Override

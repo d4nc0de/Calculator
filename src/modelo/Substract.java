@@ -11,7 +11,7 @@ package modelo;
 public class Substract extends Operation {
 
     public Substract(double number1, double number2) {
-        super(number1, number2);
+        super(number1, number2, "Resta", number1 - number2);
     }
 
     @Override
