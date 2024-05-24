@@ -35,7 +35,7 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtPimerNumero" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtPrimerNumero" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtSegundoNumero" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtResult" alignment="0" pref="146" max="32767" attributes="0"/>
                       </Group>
@@ -76,7 +76,7 @@
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtPimerNumero" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPrimerNumero" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -220,7 +220,7 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPimerNumero">
+    <Component class="javax.swing.JTextField" name="txtPrimerNumero">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
       </Properties>
