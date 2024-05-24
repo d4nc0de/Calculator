@@ -13,13 +13,9 @@ import modelo.Operation;
 public class Divide extends Operation {
 
     public Divide(double number1, double number2) {
-        super(number1, number2, "Division", number1 / number2);
+        super(number1, number2, " / ", number1 / number2);
     }
 
-    @Override
-    public double operation(double number1, double number2) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
    
     

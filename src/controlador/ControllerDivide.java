@@ -25,13 +25,14 @@ public class ControllerDivide implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent DIV) {
         model.setPrimerNumero(Double.parseDouble(view.txtPimerNumero.getText()));
         model.setSegundoNumero(Double.parseDouble(view.txtSegundoNumero.getText()));
-        Add sumar = new Add(model.getPrimerNumero(), model.getSegundoNumero());
-        History.getInstance().addOperation(sumar);
-        model.setResultado(sumar.operation(model.getPrimerNumero(), model.getSegundoNumero()));
+        Divide division = new Divide(model.getPrimerNumero(), model.getSegundoNumero());
+        History.getInstance().addOperation(division);
+        model.setResultado(division.getResult());
         view.txtResult.setText(String.valueOf(model.getResultado()));
+        System.out.println(model.getResultado());
     }
 
     public static Response createDivision(String numero1, String numero2) {

@@ -26,6 +26,11 @@ public abstract class Operation {
     public String toString() {
         return number1 + " " + operator + " " + number2 + " = " + result;
     }
+
+    public double getResult() {
+        return result;
+    }
+
     
-    public abstract double operation(double number1, double number2);
+    
 }

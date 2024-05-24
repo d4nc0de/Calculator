@@ -24,13 +24,14 @@ public class ControllerAdd implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent ADD) {
         model.setPrimerNumero(Double.parseDouble(view.txtPimerNumero.getText()));
         model.setSegundoNumero(Double.parseDouble(view.txtSegundoNumero.getText()));
         Add sumar = new Add(model.getPrimerNumero(), model.getSegundoNumero());
         History.getInstance().addOperation(sumar);
-        model.setResultado(sumar.operation(model.getPrimerNumero(), model.getSegundoNumero()));
+        model.setResultado(sumar.getResult());
         view.txtResult.setText(String.valueOf(model.getResultado()));
+        
     }
 
     public static Response createAddition(String numero1, String numero2) {

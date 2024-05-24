@@ -25,13 +25,12 @@ public class ControllerMultiply implements ActionListener {
 
     }
     
-    public void actionPerformed(ActionEvent e){
-    
+    public void actionPerformed(ActionEvent MULTY){
         model.setPrimerNumero(Double.parseDouble(view.txtPimerNumero.getText()));
         model.setSegundoNumero(Double.parseDouble(view.txtSegundoNumero.getText()));
         Multiply multiplicacion = new Multiply(model.getPrimerNumero(), model.getSegundoNumero());
         History.getInstance().addOperation(multiplicacion);
-        model.setResultado(multiplicacion.operation(model.getPrimerNumero(),model.getSegundoNumero() ));
+        model.setResultado(multiplicacion.getResult());
         view.txtResult.setText(String.valueOf(model.getResultado()));
     }
     

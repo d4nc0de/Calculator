@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import modelo.Add;
 import modelo.History;
 import modelo.Modelo;
+import modelo.Power;
 import vista.Vista;
 
 public class ControllerPower implements ActionListener {
@@ -24,13 +25,14 @@ public class ControllerPower implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent POW) {
         model.setPrimerNumero(Double.parseDouble(view.txtPimerNumero.getText()));
         model.setSegundoNumero(Double.parseDouble(view.txtSegundoNumero.getText()));
-        Add sumar = new Add(model.getPrimerNumero(), model.getSegundoNumero());
-        History.getInstance().addOperation(sumar);
-        model.setResultado(sumar.operation(model.getPrimerNumero(), model.getSegundoNumero()));
+        Power potencia = new Power(model.getPrimerNumero(), model.getSegundoNumero());
+        History.getInstance().addOperation(potencia );
+        model.setResultado(potencia.getResult());   
         view.txtResult.setText(String.valueOf(model.getResultado()));
+        System.out.println(model.getResultado());
     }
 
     public static Response createAddition(String numero1, String numero2) {

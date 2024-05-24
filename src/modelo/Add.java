@@ -13,17 +13,10 @@ import modelo.Operation;
 public class Add extends Operation{
 
     public Add(double number1, double number2) {
-        super(number1, number2, "Suma", number1 + number2);
+        super(number1, number2, " + ", number1 + number2);
     }
 
-    @Override
-    public double operation(double number1, double number2) {
-        double resultado;
-        resultado = number1+number2;
-        this.result = resultado;
-        this.operator = "Suma";
-        return resultado;
-    }
+ 
 
     
     

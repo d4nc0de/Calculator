@@ -11,13 +11,12 @@ package modelo;
 public class Power extends Operation{
 
     public Power(double number1, double number2) {
-        super(number1, number2, "Potencia", Math.pow(number1, number2) );
+        super(number1, number2, " ^ ", Math.pow(number1, number2) );
     }
 
-    @Override
-    public double operation(double number1, double number2) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
+
+    
 
   
     

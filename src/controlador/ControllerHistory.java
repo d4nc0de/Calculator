@@ -31,7 +31,7 @@ public class ControllerHistory implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent HIS) {
         DefaultListModel modelolist = new DefaultListModel();
         view.txtHistory.setModel(modelolist);
         modelolist.removeAllElements();
