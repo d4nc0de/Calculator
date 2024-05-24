@@ -23,20 +23,11 @@ public class Main {
     public static void main(String[] args){
        
      
-     Modelo mod = new Modelo();
-     Vista view = new Vista();  
-     
-     ViewController ctrlView = new ViewController(view, mod);
-     ControllerMultiply ctrlMulty = new ControllerMultiply( view, mod);
-     ControllerAdd crtAdd = new ControllerAdd(view, mod);
-     ControllerSubstract crtRes = new ControllerSubstract(view, mod);
-     ControllerDivide crtDiv = new ControllerDivide(view, mod);
-     ControllerPower crtPow = new ControllerPower(view, mod);
-     ControllerHistory crtHis = new ControllerHistory(view, mod);
-     
-     
-     ctrlView.start();
-     view.setVisible(true);
+    java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Vista().setVisible(true);
+            }
+        });
      
      
      

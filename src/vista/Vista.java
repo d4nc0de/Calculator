@@ -4,12 +4,15 @@
  */
 package vista;
 
+import controlador.ControllerAdd;
+import controlador.util.Response;
 import modelo.History;
 import modelo.Operation;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import modelo.Add;
 
 /**
  *
@@ -213,7 +216,21 @@ public class Vista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
+        String num1 = txtPimerNumero.getText();
+        String num2 = txtSegundoNumero.getText();
+        
+        Response response = ControllerAdd.createAddition(num1,num2);
+        
+        if (response.getStatus() >= 500){
+        JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        }else if(response.getStatus()>= 400){
+        JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        }else{
+        JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        }
+    
+        
+        
     
     }//GEN-LAST:event_btnAddActionPerformed
 
