@@ -11,7 +11,7 @@ import modelo.Multiply;
 import vista.Vista;
 
 
-public class ControllerMultiply implements ActionListener {
+public class ControllerMultiply {
 
     private Vista view;
     private Modelo model;
@@ -20,19 +20,9 @@ public class ControllerMultiply implements ActionListener {
 
         this.view = view;
         this.model = model;
-        this.view.btnMultiply.addActionListener(this);
+   
         
 
-    }
-    
-    public void actionPerformed(ActionEvent e){
-    
-        model.setPrimerNumero(Double.parseDouble(view.txtPimerNumero.getText()));
-        model.setSegundoNumero(Double.parseDouble(view.txtSegundoNumero.getText()));
-        Multiply multiplicacion = new Multiply(model.getPrimerNumero(), model.getSegundoNumero());
-        History.getInstance().addOperation(multiplicacion);
-        model.setResultado(multiplicacion.operation(model.getPrimerNumero(),model.getSegundoNumero() ));
-        view.txtResult.setText(String.valueOf(model.getResultado()));
     }
     
      public static Response createMultiplication(String numero1, String numero2) {

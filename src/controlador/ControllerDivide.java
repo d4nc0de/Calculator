@@ -11,7 +11,7 @@ import modelo.History;
 import modelo.Modelo;
 import vista.Vista;
 
-public class ControllerDivide implements ActionListener {
+public class ControllerDivide {
 
     private Vista view;
     private Modelo model;
@@ -20,18 +20,7 @@ public class ControllerDivide implements ActionListener {
 
         this.model = model;
         this.view = view;
-        this.view.btnAdd.addActionListener(this);
 
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        model.setPrimerNumero(Double.parseDouble(view.txtPimerNumero.getText()));
-        model.setSegundoNumero(Double.parseDouble(view.txtSegundoNumero.getText()));
-        Add sumar = new Add(model.getPrimerNumero(), model.getSegundoNumero());
-        History.getInstance().addOperation(sumar);
-        model.setResultado(sumar.operation(model.getPrimerNumero(), model.getSegundoNumero()));
-        view.txtResult.setText(String.valueOf(model.getResultado()));
     }
 
     public static Response createDivision(String numero1, String numero2) {

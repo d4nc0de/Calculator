@@ -10,7 +10,7 @@ import modelo.History;
 import modelo.Modelo;
 import vista.Vista;
 
-public class ControllerAdd implements ActionListener {
+public class ControllerAdd{
 
     private Vista view;
     private Modelo model;
@@ -19,20 +19,10 @@ public class ControllerAdd implements ActionListener {
 
         this.model = model;
         this.view = view;
-        this.view.btnAdd.addActionListener(this);
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        model.setPrimerNumero(Double.parseDouble(view.txtPimerNumero.getText()));
-        model.setSegundoNumero(Double.parseDouble(view.txtSegundoNumero.getText()));
-        Add sumar = new Add(model.getPrimerNumero(), model.getSegundoNumero());
-        History.getInstance().addOperation(sumar);
-        model.setResultado(sumar.operation(model.getPrimerNumero(), model.getSegundoNumero()));
-        view.txtResult.setText(String.valueOf(model.getResultado()));
-    }
-
+    
     public static Response createAddition(String numero1, String numero2) {
         try {
             int intN1, intN2;
@@ -47,8 +37,9 @@ public class ControllerAdd implements ActionListener {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
             History history = History.getInstance();
-            history.addOperation(new Add(intN1,intN2));
-            return new Response("Addition created successfully", Status.CREATED);
+            Add Suma = new Add(intN1,intN2);
+            history.addOperation(Suma);
+            return new Response("Addition created successfully", Status.CREATED, Suma);
         } catch (Exception ex) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
         }
