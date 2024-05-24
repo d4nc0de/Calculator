@@ -226,7 +226,17 @@ public class Vista extends javax.swing.JFrame {
         }else if(response.getStatus()>= 400){
         JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         }else{
-        JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
+        
+        Object obj = response.getObject();
+        String resultado = "";
+
+        if (obj instanceof Add) {
+            Add person = (Add) obj;
+            resultado = String.valueOf(((Add) obj).getResult());
+             
+        }
+        txtResult.setText(resultado);
         }
     
         

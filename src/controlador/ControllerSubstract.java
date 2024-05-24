@@ -20,12 +20,21 @@ public class ControllerSubstract {
 
         this.model = model;
         this.view = view;
-     
+        
 
     }
 
-    
-
+ /*
+    public void actionPerformed(ActionEvent SUBS) {
+        model.setPrimerNumero(Double.parseDouble(view.txtPimerNumero.getText()));
+        model.setSegundoNumero(Double.parseDouble(view.txtSegundoNumero.getText()));
+        Substract resta = new Substract(model.getPrimerNumero(), model.getSegundoNumero());
+        History.getInstance().addOperation(resta);
+        model.setResultado(resta.getResult());
+        view.txtResult.setText(String.valueOf(model.getResultado()));
+        System.out.println(model.getResultado());
+    }
+*/
     public static Response createSubstraction(String numero1, String numero2) {
         try {
             int intN1, intN2;

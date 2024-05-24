@@ -28,8 +28,5 @@ public class Main {
                 new Vista().setVisible(true);
             }
         });
-     
-     
-     
     }
 }
