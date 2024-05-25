@@ -25,21 +25,22 @@ public class ControllerAdd{
     
     public static Response createAddition(String numero1, String numero2) {
         try {
-            int intN1, intN2;
+            double DoubleN1, DoubleN2;
             try {
-                intN1 = Integer.parseInt(numero1);
+                DoubleN1 = Double.parseDouble(numero1);
             } catch (NumberFormatException ex) {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
             try {
-                intN2 = Integer.parseInt(numero2);
+                DoubleN2 = Double.parseDouble(numero2);
             } catch (NumberFormatException ex) {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
             History history = History.getInstance();
-            Add Suma = new Add(intN1,intN2);
-            history.addOperation(Suma);
-            return new Response("Addition created successfully", Status.CREATED, Suma);
+            Add suma = new Add(DoubleN1,DoubleN2);
+            history.addOperation(suma);
+            System.out.println("Se agrego la suma a la lista");
+            return new Response("Addition created successfully", Status.CREATED, suma);
         } catch (Exception ex) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
         }

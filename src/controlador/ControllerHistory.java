@@ -4,6 +4,8 @@
  */
 package controlador;
 
+import controlador.util.Response;
+import controlador.util.Status;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,35 +18,31 @@ import vista.Vista;
  *
  * @author Daniel
  */
-public class ControllerHistory implements ActionListener {
-    
+public class ControllerHistory {
+
     private Modelo model;
-    private Vista view;
-    
-    
-     public ControllerHistory (Vista view, Modelo model){
-        
+    private static Vista view;
+
+    public ControllerHistory(Modelo model) {
+        this.view = Vista.getInstance();
         this.model = model;
-        this.view = view;
-        this.view.btnUpdate.addActionListener(this);
-        
+
     }
 
-    @Override
-    public void actionPerformed(ActionEvent HIS) {
-        DefaultListModel modelolist = new DefaultListModel();
-        view.txtHistory.setModel(modelolist);
-        modelolist.removeAllElements();
-        
-        ArrayList array = new ArrayList<>();
-        array = History.getInstance().getOperations();
-        
-        
-        int cont = 0;
-        for (int i =  array.size() - 1; i >= 0 ; i--) {
-            
-            modelolist.addElement(array.get(i)) ;
-            cont += 1;
+    public static Response updateHistory() {
+        try {
+            DefaultListModel modelolist = new DefaultListModel();
+            view.txtHistory.setModel(modelolist);
+            modelolist.removeAllElements();
+
+            ArrayList array = History.getInstance().getOperations();
+
+            for (int i = array.size() - 1; i >= 0; i--) {
+                modelolist.addElement(array.get(i));                
+            }
+        } catch (Exception ex) {
+            return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
         }
+        return new Response("Person data updated successfully", Status.OK);
     }
 }

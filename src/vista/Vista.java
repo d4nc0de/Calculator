@@ -5,28 +5,31 @@
 package vista;
 
 import controlador.ControllerAdd;
+import controlador.ControllerDivide;
+import controlador.ControllerHistory;
+import controlador.ControllerMultiply;
+import controlador.ControllerPower;
+import controlador.ControllerSubstract;
 import controlador.util.Response;
 import modelo.History;
 import modelo.Operation;
 import java.util.ArrayList;
-import java.util.Collections;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import modelo.Add;
+import modelo.Divide;
+import modelo.Multiply;
+import modelo.Power;
+import modelo.Substract;
 
 /**
  *
  * @author edangulo
  */
 public class Vista extends javax.swing.JFrame {
-    
-    private History history;
 
-    /**
-     * Creates new form Calculator
-     */
     public Vista() {
-        this.history = new History();
         initComponents();
     }
 
@@ -47,7 +50,7 @@ public class Vista extends javax.swing.JFrame {
         btnPotency = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
-        txtPimerNumero = new javax.swing.JTextField();
+        txtPrimerNumero = new javax.swing.JTextField();
         txtSegundoNumero = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -117,7 +120,7 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
-        txtPimerNumero.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPrimerNumero.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         txtSegundoNumero.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
@@ -153,7 +156,7 @@ public class Vista extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPimerNumero)
+                            .addComponent(txtPrimerNumero)
                             .addComponent(txtSegundoNumero)
                             .addComponent(txtResult, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -184,7 +187,7 @@ public class Vista extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtPimerNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrimerNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdate))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +219,7 @@ public class Vista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        String num1 = txtPimerNumero.getText();
+        String num1 = txtPrimerNumero.getText();
         String num2 = txtSegundoNumero.getText();
         
         Response response = ControllerAdd.createAddition(num1,num2);
@@ -226,60 +229,133 @@ public class Vista extends javax.swing.JFrame {
         }else if(response.getStatus()>= 400){
         JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         }else{
-        JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
-        
         Object obj = response.getObject();
-        String resultado = "";
-
-        if (obj instanceof Add) {
-            Add person = (Add) obj;
-            resultado = String.valueOf(((Add) obj).getResult());
-             
-        }
+        String resultado = String.valueOf(((Add) obj).getResult());
         txtResult.setText(resultado);
+        JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
         }
-    
-        
-        
-    
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSubtractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubtractActionPerformed
-        // TODO add your handling code here:
-       
-        
+        String num1 = txtPrimerNumero.getText();
+        String num2 = txtSegundoNumero.getText();
+
+        Response response = ControllerSubstract.createSubstraction(num1, num2);
+
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else {
+            ControllerHistory.updateHistory();
+            Object obj = response.getObject();
+            String resultado = String.valueOf(((Substract)obj).getResult());
+            txtPrimerNumero.setText("");
+            txtSegundoNumero.setText("");
+            txtResult.setText(resultado);
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
+        } 
     }//GEN-LAST:event_btnSubtractActionPerformed
 
     private void btnMultiplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultiplyActionPerformed
-        // TODO add your handling code here:
-       
+        String num1 = txtPrimerNumero.getText();
+        String num2 = txtSegundoNumero.getText();
+
+        Response response = ControllerMultiply.createMultiplication(num1, num2);
+
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else {
+            ControllerHistory.updateHistory();
+            Object obj = response.getObject();
+            String resultado = String.valueOf((( Multiply) obj).getResult());
+            txtPrimerNumero.setText("");
+            txtSegundoNumero.setText("");
+            txtResult.setText(resultado);
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
+        }
+
     }//GEN-LAST:event_btnMultiplyActionPerformed
 
     private void btnDivideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDivideActionPerformed
-        // TODO add your handling code here:
-        
+        String num1 = txtPrimerNumero.getText();
+        String num2 = txtSegundoNumero.getText();
+
+        Response response = ControllerDivide.createDivition(num1, num2);
+
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else {
+            ControllerHistory.updateHistory();
+            Object obj = response.getObject();
+            String resultado = String.valueOf(((Divide) obj).getResult());
+
+            txtPrimerNumero.setText("");
+            txtSegundoNumero.setText("");
+            txtResult.setText(resultado);
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
+        } 
+
     }//GEN-LAST:event_btnDivideActionPerformed
 
     private void btnPotencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPotencyActionPerformed
-        // TODO add your handling code here:
-    
+        String num1 = txtPrimerNumero.getText();
+        String num2 = txtSegundoNumero.getText();
+
+        Response response = ControllerPower.createPower(num1, num2);
+
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() == 201) {
+            ControllerHistory.updateHistory();
+            Object obj = response.getObject();
+            String resultado = String.valueOf(((Power) obj).getResult());
+
+            txtPrimerNumero.setText("");
+            txtSegundoNumero.setText("");
+            txtResult.setText(resultado);
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
+        }
+
     }//GEN-LAST:event_btnPotencyActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
-       
+        txtPrimerNumero.setText("");
+        txtSegundoNumero.setText("");
+        txtResult.setText("");
+        //txtHistory.setText("");
+
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-       
+        Response response = ControllerHistory.updateHistory();
+        if(response.getStatus() >= 500){
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        }else if(response.getStatus() >= 400){
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
+        }
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-      
+    public JList<String> getTxtHistory() {
+        return txtHistory;
+    }
+
+    private static Vista instance;
+
+    public static Vista getInstance() {
+        if (instance == null) {
+            instance = new Vista();
+        }
+        return instance;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -296,7 +372,7 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     public javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JList<String> txtHistory;
-    public javax.swing.JTextField txtPimerNumero;
+    public javax.swing.JTextField txtPrimerNumero;
     public javax.swing.JTextField txtResult;
     public javax.swing.JTextField txtSegundoNumero;
     // End of variables declaration//GEN-END:variables
