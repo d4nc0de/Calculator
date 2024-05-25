@@ -22,35 +22,22 @@ import vista.Vista;
 public class ControllerHistory {
 
     private Modelo model;
-    private static Vista view;
+    public static Vista view;
 
-    public ControllerHistory(Modelo model) {
-        this.view = view.getInstance();
-        this.model = model;
+    public ControllerHistory() {
+        this.view = Vista.getInstance();
+        this.model = null;
 
     }
 
-    public static Response updateHistory() {
+    public static Response updateHistory(DefaultListModel modelolist) {
         try {
-            DefaultListModel<String> modelolist = new DefaultListModel<>();
             System.out.println("1");
-
-            System.out.println("2");
             modelolist.removeAllElements();
-            System.out.println("3");
             ArrayList array = History.getInstance().getOperations();
-            System.out.println("4");
-
             for (int i = array.size() - 1; i >= 0; i--) {
                 modelolist.addElement(array.get(i).toString());
             }
-            System.out.println("5");
-
-            SwingUtilities.invokeLater(() -> {
-                view.txtHistory.setModel(modelolist);
-            });
-            System.out.println("6");
-
             return new Response("Person data updated successfully", Status.OK);
         } catch (Exception ex) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
