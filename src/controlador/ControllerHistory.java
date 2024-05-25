@@ -23,8 +23,8 @@ public class ControllerHistory {
     private Modelo model;
     private static Vista view;
 
-    public ControllerHistory(Modelo model) {
-        this.view = Vista.getInstance();
+    public ControllerHistory(Modelo model, Vista view) {
+        this.view = view;
         this.model = model;
 
     }
@@ -32,17 +32,23 @@ public class ControllerHistory {
     public static Response updateHistory() {
         try {
             DefaultListModel modelolist = new DefaultListModel();
-            view.txtHistory.setModel(modelolist);
+            System.out.println("1");
+            
+            System.out.println("2");
             modelolist.removeAllElements();
-
+            System.out.println("3");
             ArrayList array = History.getInstance().getOperations();
+            System.out.println("4");
 
             for (int i = array.size() - 1; i >= 0; i--) {
                 modelolist.addElement(array.get(i));                
             }
+            System.out.println("5");
+            view.txtHistory.setModel(modelolist);
+            System.out.println("6");
+            return new Response("Person data updated successfully", Status.OK);
         } catch (Exception ex) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
         }
-        return new Response("Person data updated successfully", Status.OK);
     }
 }

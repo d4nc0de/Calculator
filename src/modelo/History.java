@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class History {
     
     private ArrayList<Operation> operations;
+    private static History instance;
 
     public History() {
         this.operations = new ArrayList<>();
@@ -28,7 +29,7 @@ public class History {
     }
     
     
-    private static History instance;
+    
     
      public static History getInstance() {
         if (instance == null) {
