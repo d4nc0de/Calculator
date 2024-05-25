@@ -38,10 +38,11 @@ public class ControllerMultiply {
             } catch (NumberFormatException ex) {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
-            History history = History.getInstance();           
-            history.addOperation(new Multiply(DoubleN1,DoubleN2));
+            History history = History.getInstance();    
+            Multiply multi = new Multiply(DoubleN1,DoubleN2);
+            history.addOperation(multi);
             System.out.println("Se agrego la multiplicacion a la lista");
-            return new Response("Multiplication created successfully", Status.CREATED);
+            return new Response("Multiplication created successfully", Status.CREATED, multi);
         } catch (Exception ex) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
         }

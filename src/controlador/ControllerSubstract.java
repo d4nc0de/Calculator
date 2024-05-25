@@ -36,10 +36,11 @@ public class ControllerSubstract {
             } catch (NumberFormatException ex) {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
-            History history = History.getInstance();           
-            history.addOperation(new Substract(DoubleN1,DoubleN2));
+            History history = History.getInstance();
+            Substract resta = new Substract(DoubleN1,DoubleN2);
+            history.addOperation(resta);
             System.out.println("Se agrego la resta a la lista");
-            return new Response("Substraction created successfully", Status.CREATED);
+            return new Response("Substraction created successfully", Status.CREATED,resta);
         } catch (Exception ex) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
         }

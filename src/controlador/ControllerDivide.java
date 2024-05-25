@@ -41,9 +41,10 @@ public class ControllerDivide {
                 return new Response ("Divider can't be 0", Status.BAD_REQUEST);
             }
             History history = History.getInstance();
-            history.addOperation(new Divide(DoubleN1,DoubleN2));
+            Divide div = new Divide(DoubleN1,DoubleN2);
+            history.addOperation(div);
             System.out.println("Se agrego la division a la lista");
-            return new Response("Division created successfully", Status.CREATED);
+            return new Response("Division created successfully", Status.CREATED, div);
         } catch (Exception ex) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
         }

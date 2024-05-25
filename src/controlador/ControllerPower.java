@@ -37,9 +37,10 @@ public class ControllerPower {
                 return new Response("Id must be numeric", Status.BAD_REQUEST);
             }
             History history = History.getInstance();           
-            history.addOperation(new Power(DoubleN1,DoubleN2));
+            Power power = new Power(DoubleN1,DoubleN2);
+            history.addOperation(power);
             System.out.println("Se agrego la potencia a la lista");
-            return new Response("Addition created successfully", Status.CREATED);
+            return new Response("Addition created successfully", Status.CREATED,power);
         } catch (Exception ex) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
         }

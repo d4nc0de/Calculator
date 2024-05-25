@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import modelo.Add;
 import modelo.Divide;
 import modelo.Multiply;
+import modelo.Power;
 import modelo.Substract;
 
 /**
@@ -220,32 +221,19 @@ public class Vista extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         String num1 = txtPrimerNumero.getText();
         String num2 = txtSegundoNumero.getText();
-
-        Response response = ControllerAdd.createAddition(num1, num2);
-
-        if (response.getStatus() >= 500) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() >= 400) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() == 201) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-            ControllerHistory.updateHistory();
-            Object obj = response.getObject();
-            String resultado = "";
-
-            if (obj instanceof Add) {
-                Add person = (Add) obj;
-                resultado = String.valueOf(person.getResult());
-
-            }
-            txtPrimerNumero.setText("");
-            txtSegundoNumero.setText("");
-            txtResult.setText(resultado);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        
+        Response response = ControllerAdd.createAddition(num1,num2);
+        
+        if (response.getStatus() >= 500){
+        JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        }else if(response.getStatus()>= 400){
+        JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        }else{
+        Object obj = response.getObject();
+        String resultado = String.valueOf(((Add) obj).getResult());
+        txtResult.setText(resultado);
+        JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
         }
-
-
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSubtractActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubtractActionPerformed
@@ -258,24 +246,15 @@ public class Vista extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() == 201) {
+        } else {
             ControllerHistory.updateHistory();
             Object obj = response.getObject();
-            String resultado = "";
-
-            if (obj instanceof Substract) {
-                Substract person = (Substract ) obj;
-                resultado = String.valueOf(((Substract ) obj).getResult());
-
-            }
+            String resultado = String.valueOf(((Substract)obj).getResult());
             txtPrimerNumero.setText("");
             txtSegundoNumero.setText("");
             txtResult.setText(resultado);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        }
-
-
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
+        } 
     }//GEN-LAST:event_btnSubtractActionPerformed
 
     private void btnMultiplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultiplyActionPerformed
@@ -288,21 +267,14 @@ public class Vista extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() == 201) {
+        } else {
             ControllerHistory.updateHistory();
             Object obj = response.getObject();
-            String resultado = "";
-
-            if (obj instanceof Multiply) {
-                Multiply person = ( Multiply) obj;
-                resultado = String.valueOf((( Multiply) obj).getResult());
-
-            }
+            String resultado = String.valueOf((( Multiply) obj).getResult());
             txtPrimerNumero.setText("");
             txtSegundoNumero.setText("");
             txtResult.setText(resultado);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
         }
 
     }//GEN-LAST:event_btnMultiplyActionPerformed
@@ -317,22 +289,16 @@ public class Vista extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() == 201) {
+        } else {
             ControllerHistory.updateHistory();
             Object obj = response.getObject();
-            String resultado = "";
+            String resultado = String.valueOf(((Divide) obj).getResult());
 
-            if (obj instanceof Divide) {
-                Divide person = (Divide) obj;
-                resultado = String.valueOf(((Divide) obj).getResult());
-
-            }
             txtPrimerNumero.setText("");
             txtSegundoNumero.setText("");
             txtResult.setText(resultado);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        }
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
+        } 
 
     }//GEN-LAST:event_btnDivideActionPerformed
 
@@ -347,10 +313,14 @@ public class Vista extends javax.swing.JFrame {
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() == 201) {
+            ControllerHistory.updateHistory();
+            Object obj = response.getObject();
+            String resultado = String.valueOf(((Power) obj).getResult());
+
             txtPrimerNumero.setText("");
             txtSegundoNumero.setText("");
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+            txtResult.setText(resultado);
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
         }
 
     }//GEN-LAST:event_btnPotencyActionPerformed
@@ -364,7 +334,14 @@ public class Vista extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-
+        Response response = ControllerHistory.updateHistory();
+        if(response.getStatus() >= 500){
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        }else if(response.getStatus() >= 400){
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -379,10 +356,6 @@ public class Vista extends javax.swing.JFrame {
             instance = new Vista();
         }
         return instance;
-    }
-
-    public static void main(String args[]) {
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
