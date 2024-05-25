@@ -18,6 +18,9 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import modelo.Add;
+import modelo.Divide;
+import modelo.Multiply;
+import modelo.Substract;
 
 /**
  *
@@ -225,9 +228,19 @@ public class Vista extends javax.swing.JFrame {
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() == 201) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+            ControllerHistory.updateHistory();
+            Object obj = response.getObject();
+            String resultado = "";
+
+            if (obj instanceof Add) {
+                Add person = (Add) obj;
+                resultado = String.valueOf(person.getResult());
+
+            }
             txtPrimerNumero.setText("");
             txtSegundoNumero.setText("");
-            ControllerHistory.updateHistory();
+            txtResult.setText(resultado);
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         }
@@ -246,8 +259,18 @@ public class Vista extends javax.swing.JFrame {
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() == 201) {
+            ControllerHistory.updateHistory();
+            Object obj = response.getObject();
+            String resultado = "";
+
+            if (obj instanceof Substract) {
+                Substract person = (Substract ) obj;
+                resultado = String.valueOf(((Substract ) obj).getResult());
+
+            }
             txtPrimerNumero.setText("");
             txtSegundoNumero.setText("");
+            txtResult.setText(resultado);
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         }
@@ -266,8 +289,18 @@ public class Vista extends javax.swing.JFrame {
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() == 201) {
+            ControllerHistory.updateHistory();
+            Object obj = response.getObject();
+            String resultado = "";
+
+            if (obj instanceof Multiply) {
+                Multiply person = ( Multiply) obj;
+                resultado = String.valueOf((( Multiply) obj).getResult());
+
+            }
             txtPrimerNumero.setText("");
             txtSegundoNumero.setText("");
+            txtResult.setText(resultado);
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         }
@@ -285,8 +318,18 @@ public class Vista extends javax.swing.JFrame {
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() == 201) {
+            ControllerHistory.updateHistory();
+            Object obj = response.getObject();
+            String resultado = "";
+
+            if (obj instanceof Divide) {
+                Divide person = (Divide) obj;
+                resultado = String.valueOf(((Divide) obj).getResult());
+
+            }
             txtPrimerNumero.setText("");
             txtSegundoNumero.setText("");
+            txtResult.setText(resultado);
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         }
