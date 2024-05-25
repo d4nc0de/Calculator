@@ -37,7 +37,7 @@ public class ControllerDigits {
             if (sw) {
                 resultado.append(c);
             } else {
-                if (i < 3) {
+                if (i <= 3) {
                     resultado.append(c);
                     i++;
                 }
