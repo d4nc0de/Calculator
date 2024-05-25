@@ -5,6 +5,7 @@
 package vista;
 
 import controlador.ControllerAdd;
+import controlador.ControllerDigits;
 import controlador.ControllerDivide;
 import controlador.ControllerHistory;
 import static controlador.ControllerHistory.view;
@@ -294,7 +295,8 @@ public class Vista extends javax.swing.JFrame {
         } else {
       
             Object obj = response.getObject();
-            String resultado = String.valueOf(((Divide) obj).getResult());
+            double num3 = ((Divide)obj).getResult();
+            String resultado = String.valueOf(ControllerDigits.digitsVef(num3));
 
             txtPrimerNumero.setText("");
             txtSegundoNumero.setText("");
