@@ -5,8 +5,10 @@
 package vista;
 
 import controlador.ControllerAdd;
+import controlador.ControllerDigits;
 import controlador.ControllerDivide;
 import controlador.ControllerHistory;
+import static controlador.ControllerHistory.view;
 import controlador.ControllerMultiply;
 import controlador.ControllerPower;
 import controlador.ControllerSubstract;
@@ -28,9 +30,10 @@ import modelo.Substract;
  * @author edangulo
  */
 public class Vista extends javax.swing.JFrame {
-
+    DefaultListModel modelolist = new DefaultListModel();
     public Vista() {
         initComponents();
+        txtHistory.setModel(modelolist);
     }
 
     /**
@@ -247,7 +250,7 @@ public class Vista extends javax.swing.JFrame {
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else {
-            ControllerHistory.updateHistory();
+           
             Object obj = response.getObject();
             String resultado = String.valueOf(((Substract)obj).getResult());
             txtPrimerNumero.setText("");
@@ -268,7 +271,7 @@ public class Vista extends javax.swing.JFrame {
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else {
-            ControllerHistory.updateHistory();
+      
             Object obj = response.getObject();
             String resultado = String.valueOf((( Multiply) obj).getResult());
             txtPrimerNumero.setText("");
@@ -290,9 +293,10 @@ public class Vista extends javax.swing.JFrame {
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else {
-            ControllerHistory.updateHistory();
+      
             Object obj = response.getObject();
-            String resultado = String.valueOf(((Divide) obj).getResult());
+            double num3 = ((Divide)obj).getResult();
+            String resultado = String.valueOf(ControllerDigits.digitsVef(num3));
 
             txtPrimerNumero.setText("");
             txtSegundoNumero.setText("");
@@ -313,7 +317,7 @@ public class Vista extends javax.swing.JFrame {
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() == 201) {
-            ControllerHistory.updateHistory();
+         
             Object obj = response.getObject();
             String resultado = String.valueOf(((Power) obj).getResult());
 
@@ -329,12 +333,14 @@ public class Vista extends javax.swing.JFrame {
         txtPrimerNumero.setText("");
         txtSegundoNumero.setText("");
         txtResult.setText("");
-        //txtHistory.setText("");
+       
 
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        Response response = ControllerHistory.updateHistory();
+        ControllerHistory controller = new ControllerHistory();
+        controller.view = new Vista();
+        Response response = ControllerHistory.updateHistory(modelolist);
         if(response.getStatus() >= 500){
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         }else if(response.getStatus() >= 400){

@@ -7,7 +7,10 @@ public class Add extends Operation{
         super(number1, number2, " + ", number1 + number2);
     }
 
- 
+    @Override
+    public double getResult() {
+        return result;
+    }
 
     
     

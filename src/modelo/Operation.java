@@ -1,6 +1,8 @@
 
 package modelo;
 
+import controlador.ControllerDigits;
+
 public abstract class Operation {
     
     protected double number1;
@@ -17,7 +19,7 @@ public abstract class Operation {
 
     @Override
     public String toString() {
-        return number1 + " " + operator + " " + number2 + " = " + result;
+        return number1 + " " + operator + " " + number2 + " = " + ControllerDigits.digitsVef(result);
     }
 
     public double getResult() {
