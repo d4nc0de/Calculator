@@ -3,8 +3,6 @@ package controlador;
 
 import controlador.util.Response;
 import controlador.util.Status;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import modelo.History;
 import modelo.Modelo;
 import modelo.Multiply;

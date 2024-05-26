@@ -30,7 +30,9 @@ import modelo.Substract;
  * @author edangulo
  */
 public class Vista extends javax.swing.JFrame {
+
     DefaultListModel modelolist = new DefaultListModel();
+
     public Vista() {
         initComponents();
         txtHistory.setModel(modelolist);
@@ -219,23 +221,26 @@ public class Vista extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         String num1 = txtPrimerNumero.getText();
         String num2 = txtSegundoNumero.getText();
-        
-        Response response = ControllerAdd.createAddition(num1,num2);
-        
-        if (response.getStatus() >= 500){
-        JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        }else if(response.getStatus()>= 400){
-        JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        }else{
-        Object obj = response.getObject();
-        String resultado = String.valueOf(((Add) obj).getResult());
-        txtResult.setText(resultado);
-        JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
+
+        Response response = ControllerAdd.createAddition(num1, num2);
+
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else {
+            Object obj = response.getObject();
+            String resultado = String.valueOf(((Add) obj).getResult());
+            txtPrimerNumero.setText("");
+            txtSegundoNumero.setText("");
+            txtResult.setText(resultado);
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -250,14 +255,14 @@ public class Vista extends javax.swing.JFrame {
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else {
-           
+
             Object obj = response.getObject();
-            String resultado = String.valueOf(((Substract)obj).getResult());
+            String resultado = String.valueOf(((Substract) obj).getResult());
             txtPrimerNumero.setText("");
             txtSegundoNumero.setText("");
             txtResult.setText(resultado);
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
-        } 
+        }
     }//GEN-LAST:event_btnSubtractActionPerformed
 
     private void btnMultiplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMultiplyActionPerformed
@@ -271,9 +276,9 @@ public class Vista extends javax.swing.JFrame {
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else {
-      
+
             Object obj = response.getObject();
-            String resultado = String.valueOf((( Multiply) obj).getResult());
+            String resultado = String.valueOf(((Multiply) obj).getResult());
             txtPrimerNumero.setText("");
             txtSegundoNumero.setText("");
             txtResult.setText(resultado);
@@ -293,16 +298,16 @@ public class Vista extends javax.swing.JFrame {
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else {
-      
+
             Object obj = response.getObject();
-            double num3 = ((Divide)obj).getResult();
+            double num3 = ((Divide) obj).getResult();
             String resultado = String.valueOf(ControllerDigits.digitsVef(num3));
 
             txtPrimerNumero.setText("");
             txtSegundoNumero.setText("");
             txtResult.setText(resultado);
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
-        } 
+        }
 
     }//GEN-LAST:event_btnDivideActionPerformed
 
@@ -317,7 +322,7 @@ public class Vista extends javax.swing.JFrame {
         } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() == 201) {
-         
+
             Object obj = response.getObject();
             String resultado = String.valueOf(((Power) obj).getResult());
 
@@ -333,7 +338,7 @@ public class Vista extends javax.swing.JFrame {
         txtPrimerNumero.setText("");
         txtSegundoNumero.setText("");
         txtResult.setText("");
-       
+
 
     }//GEN-LAST:event_btnClearActionPerformed
 
@@ -341,11 +346,11 @@ public class Vista extends javax.swing.JFrame {
         ControllerHistory controller = new ControllerHistory();
         controller.view = new Vista();
         Response response = ControllerHistory.updateHistory(modelolist);
-        if(response.getStatus() >= 500){
+        if (response.getStatus() >= 500) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        }else if(response.getStatus() >= 400){
+        } else if (response.getStatus() >= 400) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response message " + response.getStatus(), JOptionPane.PLAIN_MESSAGE);
         }
 

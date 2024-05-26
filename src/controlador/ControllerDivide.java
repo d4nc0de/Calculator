@@ -3,9 +3,6 @@ package controlador;
 
 import controlador.util.Response;
 import controlador.util.Status;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import modelo.Add;
 import modelo.Divide;
 import modelo.History;
 import modelo.Modelo;
@@ -44,7 +41,7 @@ public class ControllerDivide {
             Divide div = new Divide(DoubleN1,DoubleN2);
             history.addOperation(div);
             System.out.println("Se agrego la division a la lista");
-            return new Response("Division created successfully", Status.CREATED, div);
+            return new Response("Divition created successfully", Status.CREATED, div);
         } catch (Exception ex) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
         }

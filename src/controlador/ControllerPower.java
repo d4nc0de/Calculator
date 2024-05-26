@@ -40,7 +40,7 @@ public class ControllerPower {
             Power power = new Power(DoubleN1,DoubleN2);
             history.addOperation(power);
             System.out.println("Se agrego la potencia a la lista");
-            return new Response("Addition created successfully", Status.CREATED,power);
+            return new Response("Power created successfully", Status.CREATED,power);
         } catch (Exception ex) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
         }
